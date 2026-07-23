@@ -9,37 +9,47 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-r = sr.Recognizer()
+recognizer = sr.Recognizer()
 
-with sr.Microphone() as source:
-    speak("I am listening")
-    print("Listening...")
-    r.adjust_for_ambient_noise(source)
+speak("Jarvis is now online.")
 
-    audio = r.listen(source)
+while True:
+    try:
+        with sr.Microphone() as source:
+            print("\n🎤 Listening...")
+            recognizer.adjust_for_ambient_noise(source, duration=0.5)
+            audio = recognizer.listen(source)
 
-try:
-    command = r.recognize_google(audio).lower()
-    print("You said:", command)
+        command = recognizer.recognize_google(audio).lower()
+        print("You said:", command)
 
-    if "google" in command:
-        speak("Opening Google")
-        os.system("start https://www.google.com")
+        if "google" in command:
+            speak("Opening Google")
+            os.system("start https://www.google.com")
 
-    elif "youtube" in command:
-        speak("Opening YouTube")
-        os.system("start https://www.youtube.com")
+        elif "youtube" in command:
+            speak("Opening YouTube")
+            os.system("start https://www.youtube.com")
 
-    elif "calculator" in command:
-        speak("Opening Calculator")
-        os.system("calc")
+        elif "calculator" in command:
+            speak("Opening Calculator")
+            os.system("calc")
 
-    elif "notepad" in command:
-        speak("Opening Notepad")
-        os.system("notepad")
+        elif "notepad" in command:
+            speak("Opening Notepad")
+            os.system("notepad")
 
-    else:
-        speak("Sorry, I don't know this command.")
+        elif "time" in command:
+            from datetime import datetime
+            current_time = datetime.now().strftime("%I:%M %p")
+            speak(f"The time is {current_time}")
 
-except Exception:
-    speak("Sorry, I could not understand.")
+        elif "exit" in command or "stop" in command:
+            speak("Goodbye Nishant!")
+            break
+
+        else:
+            speak("Sorry, I don't know that command.")
+
+    except Exception:
+        print("Didn't catch that. Listening again...")
