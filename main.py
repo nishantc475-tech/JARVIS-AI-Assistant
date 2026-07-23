@@ -1,22 +1,45 @@
-import asyncio
-import edge_tts
-import datetime
+import speech_recognition as sr
+import pyttsx3
+import os
 
-VOICE = "en-US-GuyNeural"
+engine = pyttsx3.init()
 
-async def speak(text):
-    communicate = edge_tts.Communicate(text, VOICE)
-    await communicate.save("voice.mp3")
+def speak(text):
+    print("Jarvis:", text)
+    engine.say(text)
+    engine.runAndWait()
 
-    import os
-    os.system("start voice.mp3")
+r = sr.Recognizer()
 
-async def main():
-    current_time = datetime.datetime.now().strftime("%I:%M %p")
+with sr.Microphone() as source:
+    speak("I am listening")
+    print("Listening...")
+    r.adjust_for_ambient_noise(source)
 
-    await speak("Hello Nishant! I am Jarvis.")
-    await asyncio.sleep(3)
+    audio = r.listen(source)
 
-    await speak(f"The time is {current_time}")
+try:
+    command = r.recognize_google(audio).lower()
+    print("You said:", command)
 
-asyncio.run(main())
+    if "google" in command:
+        speak("Opening Google")
+        os.system("start https://www.google.com")
+
+    elif "youtube" in command:
+        speak("Opening YouTube")
+        os.system("start https://www.youtube.com")
+
+    elif "calculator" in command:
+        speak("Opening Calculator")
+        os.system("calc")
+
+    elif "notepad" in command:
+        speak("Opening Notepad")
+        os.system("notepad")
+
+    else:
+        speak("Sorry, I don't know this command.")
+
+except Exception:
+    speak("Sorry, I could not understand.")
