@@ -1,14 +1,25 @@
 import speech_recognition as sr
 
-r = sr.Recognizer()
+recognizer = sr.Recognizer()
 
-with sr.Microphone() as source:
-    print("🎤 Speak now...")
-    r.adjust_for_ambient_noise(source, duration=1)
-    audio = r.listen(source)
+def listen():
 
-try:
-    text = r.recognize_google(audio, language="en-US")
-    print("You said:", text)
-except Exception as e:
-    print("Error:", e)
+    with sr.Microphone() as source:
+
+        print("🎤 Listening...")
+
+        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+
+        audio = recognizer.listen(source)
+
+    try:
+
+        command = recognizer.recognize_google(audio).lower()
+
+        print("You:", command)
+
+        return command
+
+    except:
+
+        return ""

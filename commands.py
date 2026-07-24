@@ -1,35 +1,29 @@
-import speech_recognition as sr
+from speak import speak
+import webbrowser
 import os
+from datetime import datetime
 
-r = sr.Recognizer()
+def execute(command):
 
-with sr.Microphone() as source:
-    print("🎤 Listening...")
-    r.adjust_for_ambient_noise(source, duration=1)
-    audio = r.listen(source)
+    if "open google" in command:
+        speak("Opening Google")
+        webbrowser.open("https://www.google.com")
 
-try:
-    command = r.recognize_google(audio).lower()
-    print("You said:", command)
-
-    if "hello" in command or "jarv" in command:
-       print("Hello Nishant! How can I help you?")
-       
-    elif "google" in command:
-       print("Opening Google...")
-       os.system("start https://www.google.com")
-
-    elif "notepad" in command:
-       print("Opening Notepad...")
-       os.system("notepad")
+    elif "open youtube" in command:
+        speak("Opening YouTube")
+        webbrowser.open("https://www.youtube.com")
 
     elif "calculator" in command:
-       print("Opening Calculator...")
-       os.system("calc")
+        speak("Opening Calculator")
+        os.system("calc")
+
+    elif "notepad" in command:
+        speak("Opening Notepad")
+        os.system("notepad")
+
+    elif "time" in command:
+        current_time = datetime.now().strftime("%I:%M %p")
+        speak(f"The time is {current_time}")
 
     else:
-       print("Command not recognized.")
-  
-
-except Exception as e:
-    print("Error:", e)
+        speak("Sorry, I don't know this command.")
