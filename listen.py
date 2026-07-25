@@ -8,7 +8,7 @@ def listen():
 
         print("🎤 Listening...")
 
-        recognizer.adjust_for_ambient_noise(source, duration=0.5)
+        recognizer.adjust_for_ambient_noise(source, duration=0.2)
 
         audio = recognizer.listen(source)
 
