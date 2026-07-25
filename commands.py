@@ -1,9 +1,12 @@
 from speak import speak
+from ai import ask_ai
 import webbrowser
 import os
 from datetime import datetime
 
 def execute(command):
+
+    command = command.lower()
 
     if "open google" in command:
         speak("Opening Google")
@@ -26,4 +29,11 @@ def execute(command):
         speak(f"The time is {current_time}")
 
     else:
-        speak("Sorry, I don't know this command.")
+        speak("Thinking...")
+        answer = ask_ai(command)
+
+        short_answer = answer[:250]
+
+        print(short_answer)
+        speak(short_answer)
+     
