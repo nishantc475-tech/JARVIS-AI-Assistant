@@ -4,6 +4,7 @@ import webbrowser
 import os
 from datetime import datetime
 
+
 def execute(command):
 
     command = command.lower()
@@ -30,10 +31,12 @@ def execute(command):
 
     else:
         speak("Thinking...")
+
         answer = ask_ai(command)
 
-        short_answer = answer[:250]
+        print("\nJarvis:", answer)
 
-        print(short_answer)
+        # Bahut lamba answer na bole
+        short_answer = answer[:300]
+
         speak(short_answer)
-     

@@ -8,7 +8,7 @@ while True:
 
     command = listen()
 
-    if not command:
+    if command == "":
         continue
 
     if "exit" in command:
