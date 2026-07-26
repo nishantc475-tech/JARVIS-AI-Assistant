@@ -5,6 +5,7 @@ import webbrowser
 import os
 import requests
 import mss
+import subprocess
 from datetime import datetime
 
 
@@ -170,7 +171,78 @@ def execute(command):
       except Exception as e:
         print(e)
         speak("Sorry, I could not take the screenshot.")
-        
+
+    # ---------------- OPEN DOWNLOADS ----------------
+    elif "open downloads" in command:
+
+        speak("Opening Downloads folder")
+
+        downloads = os.path.join(os.path.expanduser("~"), "Downloads")
+
+        os.startfile(downloads)
+
+    # ---------------- OPEN DESKTOP ----------------
+    elif "open desktop" in command:
+
+       speak("Opening Desktop")
+
+       try:
+           os.system("explorer.exe shell:desktop")
+       except Exception:
+           speak("Unable to open Desktop")
+
+
+    # ---------------- OPEN DOCUMENTS ----------------
+    elif "open documents" in command:
+
+       speak("Opening Documents")
+
+       try:
+           os.system("explorer.exe shell:personal")
+       except:
+           speak("Unable to open Documents")
+ 
+    # ---------------- OPEN D DRIVE ----------------
+    elif command == "open d drive" or command == "open d":
+
+        speak("Opening D Drive")
+
+        os.startfile("D:\\")
+
+    # ---------------- PLAY MUSIC ----------------
+    elif "play music" in command:
+
+        folders = [
+            os.path.join(os.environ["USERPROFILE"], "Music"),
+            "D:\\Music",
+            "D:\\Songs",
+            "D:\\Downloads"
+    ]
+
+    found = False
+
+    for folder in folders:
+
+        if os.path.exists(folder):
+
+            for file in os.listdir(folder):
+
+                if file.endswith((".mp3", ".wav")):
+
+                    speak("Playing music")
+
+                    os.startfile(os.path.join(folder, file))
+
+                    found = True
+
+                    break
+
+        if found:
+            break
+
+    if not found:
+        speak("No music file found.")
+
     # ---------------- OPEN ANY WEBSITE ----------------
     elif command.startswith("open "):
 
