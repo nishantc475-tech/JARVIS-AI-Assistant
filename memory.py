@@ -4,11 +4,10 @@ import os
 FILE_NAME = "memory.json"
 
 def load_memory():
-    if not os.path.exists(FILE_NAME):
-        return {}
-
-    with open(FILE_NAME, "r") as file:
-        return json.load(file)
+    if os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "r") as file:
+            return json.load(file)
+    return {}
 
 def save_memory(data):
     with open(FILE_NAME, "w") as file:
@@ -21,4 +20,4 @@ def remember(key, value):
 
 def recall(key):
     data = load_memory()
-    return data.get(key)
+    return data.get(key, None)
