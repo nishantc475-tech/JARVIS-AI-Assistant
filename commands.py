@@ -6,6 +6,8 @@ import os
 import requests
 import mss
 import subprocess
+from weather import get_weather
+from news import get_news
 from datetime import datetime
 
 
@@ -209,56 +211,84 @@ def execute(command):
 
         os.startfile("D:\\")
 
-    # ---------------- PLAY MUSIC ----------------
+      # ---------------- PLAY MUSIC ----------------
     elif "play music" in command:
 
-        folders = [
-            os.path.join(os.environ["USERPROFILE"], "Music"),
-            "D:\\Music",
-            "D:\\Songs",
-            "D:\\Downloads"
-    ]
+      folders = [
+         os.path.join(os.environ["USERPROFILE"], "Music"),
+         "D:\\Music",
+         "D:\\Songs",
+         "D:\\Downloads"
+      ]
 
-    found = False
+      found = False
 
-    for folder in folders:
+      for folder in folders:
 
-        if os.path.exists(folder):
+          if os.path.exists(folder):
 
-            for file in os.listdir(folder):
+               for file in os.listdir(folder):
 
-                if file.endswith((".mp3", ".wav")):
+                  if file.endswith((".mp3", ".wav")):
 
-                    speak("Playing music")
+                     speak("Playing music")
+                     os.startfile(os.path.join(folder, file))
+                     found = True
+                     break
 
-                    os.startfile(os.path.join(folder, file))
+          if found:
+                  break
 
-                    found = True
+      if not found:
+            speak("No music file found.")
 
-                    break
-
-        if found:
-            break
-
-    if not found:
-        speak("No music file found.")
-
-    # ---------------- OPEN ANY WEBSITE ----------------
+         # ---------------- OPEN ANY WEBSITE ----------------
     elif command.startswith("open "):
 
-        website = command.replace("open ", "").strip()
+           website = command.replace("open ", "").strip()
 
-        speak(f"Opening {website}")
+           speak(f"Opening {website}")
 
-        webbrowser.open(f"https://www.{website}.com")
+           webbrowser.open(f"https://www.{website}.com")
 
-    # ---------------- AI ----------------
+         # ---------------- WEATHER ----------------
+    elif "weather" in command:
+
+            city = "Dehradun"
+
+            if "in " in command:
+                  city = command.split("in ", 1)[1].strip()
+
+            result = get_weather(city)
+
+            print(result)
+
+            speak(result)
+
+            
+            # ---------------- NEWS ----------------
+    elif "news" in command or "headlines" in command:
+
+         speak("Here are today's top headlines.")
+
+         headlines = get_news()
+
+         if headlines:
+
+            for i, headline in enumerate(headlines, start=1):
+                  print(f"{i}. {headline}")
+                  speak(headline)
+
+         else:
+            speak("Sorry, I could not fetch the news.")
+
+         # ---------------- AI ----------------
     else:
 
-        speak("Thinking...")
+            speak("Thinking...")
 
-        answer = ask_ai(command)
+            answer = ask_ai(command)
 
-        print("\nJarvis:", answer)
+            print("\nJarvis:", answer)
 
-        speak(answer[:300])
+            speak(answer[:300])
