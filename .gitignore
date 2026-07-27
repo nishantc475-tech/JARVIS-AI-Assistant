@@ -7,3 +7,4 @@ test_ai.py
 list_models.py
 memory.json
 screenshot.png
+.env
