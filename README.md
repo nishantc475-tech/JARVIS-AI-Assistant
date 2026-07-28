@@ -1,34 +1,87 @@
 # 🤖 JARVIS AI Assistant
 
-A voice-controlled AI Assistant built using Python.
+A powerful AI Voice Assistant built using Python.
 
-## 🚀 Features
-- 🎤 Voice Recognition
-- 🔊 Text-to-Speech
-- 🌐 Open Google
-- ▶️ Open YouTube
-- 🧮 Open Calculator
-- 📝 Open Notepad
+## ✨ Features
 
-## 🛠 Technologies Used
+- 🎤 Voice Commands
+- 🗣️ Speech Recognition
+- 🔊 Text to Speech
+- 🧠 Gemini AI Integration
+- 🌐 Open Websites
+- 💻 Open Applications
+- 🌦️ Weather Information
+- 📰 Latest News
+- 📸 Screenshot Capture
+- 🎵 Play Music
+- 💾 Memory System
+- ⚙️ System Commands
+- 🌍 Hindi & English Support
+
+## 🛠️ Technologies Used
+
 - Python
 - SpeechRecognition
-- pyttsx3
-- Edge-TTS
+- pyttsx3 / Edge TTS
+- Google Gemini API
+- Requests
+- psutil
+- mss
+- pygame
 
 ## 📂 Project Structure
 
+```
 JARVIS-AI-ASSISTANT/
-├── main.py
-├── commands.py
-├── listen.py
-├── speak.py
-├── README.md
-└── requirements.txt
+│── main.py
+│── commands.py
+│── speak.py
+│── listen.py
+│── ai.py
+│── memory.py
+│── weather.py
+│── news.py
+│── modules/
+│   ├── apps.py
+│   ├── web.py
+│   ├── media.py
+│   ├── system.py
+│   └── ai_commands.py
+```
 
-## 👨‍💻 Author
+## 🚀 Current Features
+
+- Wake Word Detection
+- Continuous AI Chat
+- Open Calculator
+- Open Notepad
+- Open CMD
+- Open Websites
+- Weather Updates
+- News Headlines
+- Screenshot
+- Play Music
+- Remember User Information
+
+## 🔮 Upcoming Features
+
+- Continuous Conversation Mode
+- Face Recognition
+- Camera Vision
+- WhatsApp Integration
+- Email Automation
+- Desktop GUI
+- Mobile App
+- Human-like Voice
+- Smart Automation
+
+## 👨‍💻 Developer
 
 **Nishant Chauhan**
 
-B.Tech CSE (AI & ML)  
+B.Tech CSE (AI & ML)
+
 Dev Bhoomi Uttarakhand University
+
+---
+⭐ If you like this project, don't forget to star the repository.
