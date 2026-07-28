@@ -1,8 +1,28 @@
+import time
+import random
+
 from listen import listen
 from speak import speak
 from commands import execute
 
-WAKE_WORDS = ["jarv","hey jarv","hey jarvis","jar","hello", "jarvis"]
+WAKE_WORDS = [
+    "jarvis",
+    "jarv",
+    "hey jarvis",
+    "hey jarv",
+    "jar"
+]
+
+GREETINGS = [
+    "Yes Nishant, how can I help?",
+    "I'm listening.",
+    "Go ahead.",
+    "What can I do for you?",
+    "Hello Nishant.",
+    "Tell me your command.",
+    "Yes?",
+    "Ready."
+]
 
 speak("Jarvis is online.")
 
@@ -15,17 +35,24 @@ while True:
     if wake == "":
         continue
 
-    wake = wake.lower()
+    wake = wake.lower().strip()
 
     if "exit" in wake:
         speak("Goodbye Nishant.")
         break
 
-    if wake.strip() in WAKE_WORDS:
+    if wake in WAKE_WORDS:
 
-        speak("I'm listening.")
+        speak(random.choice(GREETINGS))   # Baad me random karenge
+
+        last_activity = time.time()
 
         while True:
+
+            # 30 second inactivity
+            if time.time() - last_activity > 30:
+                speak("No activity detected. Going to sleep.")
+                break
 
             print("🎤 Listening for command...")
 
@@ -34,7 +61,9 @@ while True:
             if command == "":
                 continue
 
-            command = command.lower()
+            last_activity = time.time()
+
+            command = command.lower().strip()
 
             if "exit" in command:
                 speak("Goodbye Nishant.")

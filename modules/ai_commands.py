@@ -4,11 +4,42 @@ from memory import remember, recall
 from weather import get_weather
 from news import get_news
 
-
 def handle_ai(command):
 
     command = command.lower().strip()
-
+     # Greetings
+    if command in ["hi", "hello", "hey"]:
+        speak("Hello Nishant. Nice to see you.")
+        return True
+    
+    if "good morning" in command:
+        speak("Good morning Nishant. Hope you have a wonderful day.")
+        return True
+    
+    if "good night" in command:
+        speak("Good night Nishant. Sweet dreams.")
+        return True
+    
+    if "thank you" in command or "thanks" in command:
+        speak("You're welcome Nishant.")
+        return True
+    
+    if "how are you" in command:
+        speak("I'm doing great. Thank you for asking.")
+        return True
+    
+    if "who are you" in command:
+        speak("I'm Jarvis, your personal AI Assistant.")
+        return True
+    
+    if "who made you" in command:
+        speak("I was created by Nishant using Python and Gemini AI.")
+        return True
+    
+    if "i love you" in command:
+        speak("Thank you Nishant. I'm always here to help you.")
+        return True
+    
     # ---------------- WEATHER ----------------
     if "weather" in command:
 
