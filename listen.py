@@ -2,22 +2,29 @@ import speech_recognition as sr
 
 recognizer = sr.Recognizer()
 
+# Better recognition settings
+recognizer.energy_threshold = 300
+recognizer.dynamic_energy_threshold = True
+recognizer.pause_threshold = 0.8
+
+
 def listen():
 
     with sr.Microphone() as source:
 
         print("🎤 Listening...")
 
-        recognizer.adjust_for_ambient_noise(source, duration=0.5)
-
         try:
+
             audio = recognizer.listen(
                 source,
-                timeout=5,
-                phrase_time_limit=5
+                timeout=8,
+                phrase_time_limit=7
             )
 
-            command = recognizer.recognize_google(audio).lower()
+            command = recognizer.recognize_google(audio)
+
+            command = command.lower()
 
             print("You:", command)
 

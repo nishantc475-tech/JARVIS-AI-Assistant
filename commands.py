@@ -7,6 +7,7 @@ import requests
 import mss
 import subprocess
 import psutil
+import shutil
 from weather import get_weather
 from news import get_news
 from datetime import datetime
@@ -243,45 +244,81 @@ def execute(command):
       if not found:
             speak("No music file found.")
 
-         # ---------------- OPEN ANY WEBSITE ----------------
+
+
+                 # ---------------- WEATHER ----------------
+    elif "weather" in command:
+            
+          city = "Dehradun"
+            
+          if "in " in command:
+                    city = command.split("in ", 1)[1].strip()
+            
+                    result = get_weather(city)
+            
+                    print(result)
+            
+                    speak(result)
+            
+                        
+                        # ---------------- NEWS ----------------
+    elif "news" in command or "headlines" in command:
+            
+           speak("Here are today's top headlines.")
+
+           headlines = get_news()
+            
+           if headlines:
+            
+            for i, headline in enumerate(headlines, start=1):
+               print(f"{i}. {headline}")
+               speak(headline)
+            
+           else:
+                        speak("Sorry, I could not fetch the news.")
+
+      # ----------------OPEN ANY WEBSITE----------------
     elif command.startswith("open "):
 
-           website = command.replace("open ", "").strip()
+         app = command.replace("open ", "").strip()
 
-           speak(f"Opening {website}")
+      # Website commands ko skip karo
+         websites = [
+         "google", "youtube", "github", "gmail",
+         "chatgpt", "instagram", "facebook",
+         "amazon", "flipkart", "linkedin", "spotify"
+      ]
 
-           webbrowser.open(f"https://www.{website}.com")
+         if app not in websites:
 
-         # ---------------- WEATHER ----------------
-    elif "weather" in command:
+           exe = shutil.which(app)
 
-            city = "Dehradun"
+           if exe:
+               speak(f"Opening {app}")
+               subprocess.Popen(exe)
+               return
 
-            if "in " in command:
-                  city = command.split("in ", 1)[1].strip()
+         # Common Windows apps
+           apps = {
+               "paint": "mspaint",
+               "calculator": "calc",
+               "notepad": "notepad",
+               "cmd": "cmd",
+               "explorer": "explorer",
+               "word": "winword",
+               "excel": "excel",
+               "powerpoint": "powerpnt",
+         }
 
-            result = get_weather(city)
+           if app in apps:
+               try:
+                  speak(f"Opening {app}")
+                  subprocess.Popen("start cmd", shell=True)
+                  return
+               except Exception:
+                  pass
 
-            print(result)
-
-            speak(result)
-
-            
-            # ---------------- NEWS ----------------
-    elif "news" in command or "headlines" in command:
-
-         speak("Here are today's top headlines.")
-
-         headlines = get_news()
-
-         if headlines:
-
-            for i, headline in enumerate(headlines, start=1):
-                  print(f"{i}. {headline}")
-                  speak(headline)
-
-         else:
-            speak("Sorry, I could not fetch the news.")
+         speak(f"I couldn't find {app}.")
 
     # ---------------- BATTERY ----------------
     elif "battery" in command:
@@ -401,6 +438,9 @@ def execute(command):
 
             answer = ask_ai(command)
 
-            print("\nJarvis:", answer)
+            if "401" in answer or "UNAUTHENTICATED" in answer:
+                speak("Gemini API key is invalid.")
+                return
 
-            speak(answer[:300])
+            print("\nJarvis:", answer)
+            speak(answer[:200])
