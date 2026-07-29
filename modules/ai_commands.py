@@ -3,6 +3,15 @@ from ai import ask_ai
 from memory import remember, recall
 from weather import get_weather
 from news import get_news
+from todo import add_task, show_tasks, clear_tasks
+from reminder import (
+    add_reminder,
+    show_reminders,
+    clear_reminders,
+)
+from alarm import add_alarm, parse_alarm_time
+from system_info import cpu_usage, ram_usage, battery, disk_usage
+from clipboard import get_clipboard
 
 def handle_ai(command):
 
@@ -121,6 +130,163 @@ def handle_ai(command):
 
         return True
 
+    # ---------- TODO LIST ----------
+
+    if command.startswith("add task"):
+
+        task = command.replace("add task", "").strip()
+
+        add_task(task)
+
+        speak("Task added successfully.")
+
+        return True
+
+
+    elif "show my tasks" in command:
+
+        tasks = show_tasks()
+
+        if not tasks:
+
+            speak("You have no tasks.")
+
+        else:
+
+            speak(f"You have {len(tasks)} tasks.")
+
+            for i, task in enumerate(tasks, start=1):
+
+                print(i, task)
+
+                speak(task)
+
+        return True
+
+
+    elif "clear all tasks" in command:
+
+        clear_tasks()
+
+        speak("All tasks cleared.")
+
+        return True
+
+    # ---------- REMINDERS ----------
+
+    if command.startswith("remind me to"):
+
+        reminder = command.replace("remind me to", "").strip()
+
+        add_reminder(reminder)
+
+        speak("Reminder added successfully.")
+
+        return True
+
+
+    elif "show reminders" in command:
+
+        reminders = show_reminders()
+
+        if not reminders:
+
+            speak("You don't have any reminders.")
+
+        else:
+
+            speak(f"You have {len(reminders)} reminders.")
+
+            for i, reminder in enumerate(reminders, start=1):
+
+                print(f"{i}. {reminder}")
+
+                speak(reminder)
+
+        return True
+
+
+    elif "clear reminders" in command:
+
+        clear_reminders()
+
+        speak("All reminders cleared.")
+
+        return True
+
+    # ---------- ALARM ----------
+# ---------- SMART ALARM ----------
+
+    if "set alarm for" in command:
+
+        raw_time = command.split("set alarm for", 1)[1].strip()
+
+        alarm_time = parse_alarm_time(raw_time)
+
+        if alarm_time:
+
+            add_alarm(alarm_time)
+
+            speak(f"Alarm set for {raw_time}")
+
+        else:
+
+            speak("Sorry, I couldn't understand the alarm time.")
+
+        return True
+
+    # ---------- SYSTEM INFO ----------
+
+    if "cpu usage" in command:
+
+        speak(f"CPU usage is {cpu_usage()} percent.")
+
+        return True
+
+
+    elif "ram usage" in command:
+
+        speak(f"RAM usage is {ram_usage()} percent.")
+
+        return True
+
+
+    elif "battery percentage" in command or "battery" in command:
+
+        b = battery()
+
+        if b is None:
+            speak("Battery information is not available.")
+        else:
+            speak(f"Battery is at {b} percent.")
+
+        return True
+
+
+    elif "disk usage" in command:
+
+        speak(f"Disk usage is {disk_usage()} percent.")
+
+        return True
+
+    # ---------------- CLIPBOARD ----------------
+
+    elif "read clipboard" in command:
+
+        text = get_clipboard()
+
+        if text:
+
+            speak("Clipboard contains.")
+
+            speak(text[:300])
+
+        else:
+
+            speak("Clipboard is empty.")
+
+        return True
+    
     # ---------------- GEMINI AI ----------------
     else:
 

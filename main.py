@@ -4,6 +4,7 @@ import random
 from listen import listen
 from speak import speak
 from commands import execute
+from alarm import start_alarm_service
 
 WAKE_WORDS = [
     "jarvis",
@@ -25,6 +26,7 @@ GREETINGS = [
 ]
 
 speak("Jarvis is online.")
+start_alarm_service()
 
 while True:
 

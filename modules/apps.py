@@ -7,6 +7,60 @@ from speak import speak
 
 def handle_apps(command):
 
+    # ---------- OPEN FOLDERS ----------
+
+    if "open downloads" in command:
+
+        subprocess.Popen(
+            f'explorer "{os.path.join(os.environ["USERPROFILE"], "Downloads")}"'
+        )
+
+        speak("Opening Downloads folder.")
+
+        return True
+
+
+    elif "open desktop" in command:
+
+        subprocess.Popen(
+            f'explorer "{os.path.join(os.environ["USERPROFILE"], "Desktop")}"'
+        )
+
+        speak("Opening Desktop.")
+
+        return True
+
+
+    elif "open documents" in command:
+
+        subprocess.Popen(
+            f'explorer "{os.path.join(os.environ["USERPROFILE"], "Documents")}"'
+        )
+
+        speak("Opening Documents.")
+
+        return True
+
+
+    elif "open pictures" in command:
+
+        subprocess.Popen(
+            f'explorer "{os.path.join(os.environ["USERPROFILE"], "Pictures")}"'
+        )
+
+        speak("Opening Pictures.")
+
+        return True
+
+    
+    elif "open ai project" in command or "open jarvis project" in command:
+
+        subprocess.Popen(r'explorer "D:\JARVIS-AI-ASSISTANT"')
+
+        speak("Opening Jarvis project.")
+
+        return True
+    
     # ---------- CODING MODE ----------
     if "coding mode" in command or "start coding" in command:
 
