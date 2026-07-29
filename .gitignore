@@ -8,3 +8,15 @@ list_models.py
 memory.json
 screenshot.png
 .env
+# Logs
+logs/
+*.log
+
+# Test files
+screen.png
+test.png
+test.jpg
+
+screen_test.py
+screen_vision_test.py
+vision_test.py

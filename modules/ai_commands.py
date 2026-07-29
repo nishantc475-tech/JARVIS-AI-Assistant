@@ -12,6 +12,7 @@ from reminder import (
 from alarm import add_alarm, parse_alarm_time
 from system_info import cpu_usage, ram_usage, battery, disk_usage
 from clipboard import get_clipboard
+from vision import describe_screen
 
 def handle_ai(command):
 
@@ -284,6 +285,25 @@ def handle_ai(command):
         else:
 
             speak("Clipboard is empty.")
+
+        return True
+    
+    # ---------------- SCREEN VISION ----------------
+
+    elif (
+        "describe my screen" in command
+        or "describe screen" in command
+        or "what is on my screen" in command
+        or "analyze my screen" in command
+    ):
+
+        speak("Analyzing your screen. Please wait.")
+
+        result = describe_screen()
+
+        print("\nJarvis:", result)
+
+        speak(result[:300])
 
         return True
     

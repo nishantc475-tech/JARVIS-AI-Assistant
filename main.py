@@ -5,6 +5,8 @@ from listen import listen
 from speak import speak
 from commands import execute
 from alarm import start_alarm_service
+from logger import log
+
 
 WAKE_WORDS = [
     "jarvis",
@@ -25,8 +27,12 @@ GREETINGS = [
     "Ready."
 ]
 
+
 speak("Jarvis is online.")
+log("Jarvis started.")
+
 start_alarm_service()
+
 
 while True:
 
@@ -41,18 +47,22 @@ while True:
 
     if "exit" in wake:
         speak("Goodbye Nishant.")
+        log("Jarvis closed.")
         break
 
     if wake in WAKE_WORDS:
 
-        speak(random.choice(GREETINGS))   # Baad me random karenge
+        log(f"Wake word detected: {wake}")
+
+        speak(random.choice(GREETINGS))
 
         last_activity = time.time()
 
         while True:
 
-            # 30 second inactivity
+            # Auto sleep after 30 seconds
             if time.time() - last_activity > 30:
+                log("Sleep mode due to inactivity.")
                 speak("No activity detected. Going to sleep.")
                 break
 
@@ -67,8 +77,11 @@ while True:
 
             command = command.lower().strip()
 
+            log(f"User: {command}")
+
             if "exit" in command:
                 speak("Goodbye Nishant.")
+                log("Jarvis closed.")
                 exit()
 
             if (
@@ -76,6 +89,7 @@ while True:
                 or "go to sleep" in command
                 or "stop listening" in command
             ):
+                log("Jarvis entered sleep mode.")
                 speak("Going to sleep.")
                 break
 
