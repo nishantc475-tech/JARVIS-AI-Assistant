@@ -28,6 +28,8 @@ internet_test.py
 voice_test.py
 voice_notes/*.wav
 automation_test.py
+scheduler_test.py
+schedule.json
 
 # Photos
 photo_*.jpg

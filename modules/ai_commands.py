@@ -22,6 +22,7 @@ import os
 from internet_speed import check_speed
 from voice_notes import record_voice, play_voice
 from automation import run_automation
+from scheduler import add_schedule, get_schedule
 
 def handle_ai(command):
 
@@ -479,6 +480,52 @@ def handle_ai(command):
     elif run_automation(command):
 
         speak("Done.")
+
+        return True
+
+    # ---------------- SCHEDULER ----------------
+
+    elif command.startswith("schedule"):
+ 
+        try:
+
+            text = command.replace("schedule", "").strip()
+
+            task, task_time = text.rsplit(" at ", 1)
+
+            add_schedule(task.strip(), task_time.strip())
+
+            speak(f"Task scheduled for {task_time}")
+
+        except:
+
+            speak("Please say it like: Schedule study at 8 PM")
+
+        return True
+
+
+    elif (
+        "show schedule" in command
+        or "show my schedule" in command
+    ):
+
+        tasks = get_schedule()
+
+        if len(tasks) == 0:
+
+            speak("Your schedule is empty.")
+
+            return True
+
+        speak(f"You have {len(tasks)} scheduled task.")
+
+        print("\nToday's Schedule:\n")
+
+        for item in tasks:
+
+            print(f"{item['time']} -> {item['task']}")
+
+            speak(f"{item['task']} at {item['time']}")
 
         return True
     
