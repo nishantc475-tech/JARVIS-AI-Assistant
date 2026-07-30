@@ -13,6 +13,9 @@ from alarm import add_alarm, parse_alarm_time
 from system_info import cpu_usage, ram_usage, battery, disk_usage
 from clipboard import get_clipboard
 from vision import describe_screen
+from camera import open_camera
+from camera import take_photo
+from pdf_reader import choose_pdf, summarize_pdf
 
 def handle_ai(command):
 
@@ -306,7 +309,71 @@ def handle_ai(command):
         speak(result[:300])
 
         return True
-    
+
+    # ---------------- CAMERA ----------------
+
+    elif (
+        "open camera" in command
+        or "camera open" in command
+        or "start camera" in command
+    ):
+
+        speak("Opening camera.")
+
+        result = open_camera()
+
+        print(result)
+
+        speak(result)
+
+        return True
+
+    # ---------------- TAKE PHOTO ----------------
+
+    elif (
+        "take photo" in command
+        or "take a photo" in command
+        or "capture photo" in command
+        or "click photo" in command
+    ):
+
+        speak("Get ready. Capturing photo in three seconds.")
+
+        result = take_photo()
+
+        print(result)
+
+        speak(result)
+
+        return True
+
+# ---------------- PDF SUMMARY ----------------
+
+    elif (
+        "summarize pdf" in command
+        or "read pdf" in command
+        or "summarize my pdf" in command
+        or "open pdf" in command
+    ):
+
+        speak("Please select a PDF file.")
+
+        pdf = choose_pdf()
+
+        if not pdf:
+            speak("No PDF selected.")
+            return True
+
+        speak("Reading your PDF. Please wait.")
+
+        summary = summarize_pdf(pdf)
+
+        print("\nJarvis:", summary)
+
+        speak(summary[:400])
+
+        return True
+        
     # ---------------- GEMINI AI ----------------
     else:
 
