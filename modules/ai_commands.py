@@ -19,6 +19,7 @@ from pdf_reader import choose_pdf, summarize_pdf
 from ocr import read_image_text
 from file_search import find_file
 import os
+from internet_speed import check_speed
 
 def handle_ai(command):
 
@@ -420,6 +421,25 @@ def handle_ai(command):
         speak("Opening the first result.")
 
         os.startfile(results[0])
+
+        return True
+
+    # ---------------- INTERNET SPEED ----------------
+
+    elif (
+        "internet speed" in command
+        or "check internet speed" in command
+        or "speed test" in command
+        or "check speed" in command
+    ):
+
+        speak("Checking your internet speed. Please wait.")
+
+        result = check_speed()
+
+        print("\n" + result)
+
+        speak(result)
 
         return True
     

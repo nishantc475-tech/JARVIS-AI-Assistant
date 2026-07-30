@@ -24,6 +24,7 @@ file_search_test.py
 screen_test.py
 screen_vision_test.py
 vision_test.py
+internet_test.py
 
 # Photos
 photo_*.jpg
