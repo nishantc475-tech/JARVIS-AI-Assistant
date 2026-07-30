@@ -19,7 +19,7 @@ test.jpg
 camera_test.py
 pdf_test.py
 pdf_picker_test.py
-
+ocr_test.py
 
 screen_test.py
 screen_vision_test.py

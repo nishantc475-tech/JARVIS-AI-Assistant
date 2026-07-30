@@ -16,6 +16,7 @@ from vision import describe_screen
 from camera import open_camera
 from camera import take_photo
 from pdf_reader import choose_pdf, summarize_pdf
+from ocr import read_image_text
 
 def handle_ai(command):
 
@@ -373,7 +374,27 @@ def handle_ai(command):
         speak(summary[:400])
 
         return True
-        
+
+        # ---------------- OCR ----------------
+
+    elif (
+        "read image" in command
+        or "read this image" in command
+        or "extract text" in command
+        or "scan image" in command
+    ):
+
+        speak("Please select an image.")
+
+        text = read_image_text()
+
+        print("\nExtracted Text:\n")
+        print(text)
+
+        speak(text[:400])
+
+        return True
+    
     # ---------------- GEMINI AI ----------------
     else:
 
