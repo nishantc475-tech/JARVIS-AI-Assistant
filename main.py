@@ -6,7 +6,8 @@ from speak import speak
 from commands import execute
 from alarm import start_alarm_service
 from logger import log
-
+from reminder_engine import start_reminder_engine
+from context import set_last_command
 
 WAKE_WORDS = [
     "jarvis",
@@ -32,7 +33,7 @@ speak("Jarvis is online.")
 log("Jarvis started.")
 
 start_alarm_service()
-
+start_reminder_engine()
 
 while True:
 
@@ -78,6 +79,7 @@ while True:
             command = command.lower().strip()
 
             log(f"User: {command}")
+            set_last_command(command)
 
             if "exit" in command:
                 speak("Goodbye Nishant.")

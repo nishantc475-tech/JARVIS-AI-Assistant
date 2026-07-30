@@ -8,7 +8,12 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 GNEWS_API_KEY = os.getenv("GNEWS_API_KEY")
 # ================= AI =================
 
-MODEL_NAME = "gemini-3.5-flash"
+AI_MODELS = [
+    "gemini-flash-latest",
+    "gemini-3.6-flash",
+    "gemini-2.0-flash",
+    "gemini-2.5-flash"
+]
 
 # ================= PROJECT =================
 

@@ -13,6 +13,8 @@ from alarm import add_alarm, parse_alarm_time
 from system_info import cpu_usage, ram_usage, battery, disk_usage
 from clipboard import get_clipboard
 from vision import describe_screen
+from image_picker import choose_image
+from vision import describe_image
 from camera import open_camera
 from camera import take_photo
 from pdf_reader import choose_pdf, summarize_pdf
@@ -23,6 +25,14 @@ from internet_speed import check_speed
 from voice_notes import record_voice, play_voice
 from automation import run_automation
 from scheduler import add_schedule, get_schedule
+from context import (
+    set_last_pdf,
+    get_last_pdf
+)
+from context import (
+    set_last_image,
+    get_last_image
+)
 
 def handle_ai(command):
 
@@ -225,8 +235,7 @@ def handle_ai(command):
 
         return True
 
-    # ---------- ALARM ----------
-# ---------- SMART ALARM ----------
+    # ---------- SMART ALARM ----------
 
     if "set alarm for" in command:
 
@@ -366,6 +375,8 @@ def handle_ai(command):
         speak("Please select a PDF file.")
 
         pdf = choose_pdf()
+        if pdf:
+            set_last_pdf(pdf)
 
         if not pdf:
             speak("No PDF selected.")
@@ -378,6 +389,35 @@ def handle_ai(command):
         print("\nJarvis:", summary)
 
         speak(summary[:400])
+
+        return True
+
+    # ---------------- IMAGE DESCRIPTION ----------------
+
+    elif (
+        "describe image" in command
+        or "describe this image" in command
+        or "analyze image" in command
+    ):
+
+        speak("Please select an image.")
+
+        image = choose_image()
+
+        if image:
+            set_last_image(image)
+
+        if not image:
+            speak("No image selected.")
+            return True
+
+        speak("Analyzing image. Please wait.")
+
+        result = describe_image(image)
+
+        print("\nJarvis:", result)
+
+        speak(result[:400])
 
         return True
 
@@ -526,6 +566,41 @@ def handle_ai(command):
             print(f"{item['time']} -> {item['task']}")
 
             speak(f"{item['task']} at {item['time']}")
+
+        return True
+    
+    #---------------SUMMARIZE IT-------------------
+
+    elif "summarize it" in command:
+
+        pdf = get_last_pdf()
+
+        if not pdf:
+            speak("No PDF is currently selected.")
+            return True
+
+        summary = summarize_pdf(pdf)
+
+        print(summary)
+
+        speak(summary)
+
+        return True
+    
+    #---------------IMAGE-----------------
+    elif "describe it again" in command:
+        
+        image = get_last_image()
+
+        if not image:
+            speak("No image is currently selected.")
+            return True
+
+        result = describe_image(image)
+
+        print(result)
+
+        speak(result)
 
         return True
     
