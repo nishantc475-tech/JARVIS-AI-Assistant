@@ -20,6 +20,7 @@ from ocr import read_image_text
 from file_search import find_file
 import os
 from internet_speed import check_speed
+from voice_notes import record_voice, play_voice
 
 def handle_ai(command):
 
@@ -440,6 +441,35 @@ def handle_ai(command):
         print("\n" + result)
 
         speak(result)
+
+        return True
+
+    # ---------------- VOICE NOTES ----------------
+
+    elif (
+        "take a voice note" in command
+        or "record voice note" in command
+        or "record voice" in command
+    ):
+
+        speak("Recording will start now.")
+
+        record_voice(duration=10)
+
+        speak("Voice note saved successfully.")
+
+        return True
+
+
+    elif (
+        "play voice note" in command
+        or "play my voice note" in command
+    ):
+
+        speak("Playing your voice note.")
+
+        if not play_voice():
+            speak("No voice note found.")
 
         return True
     

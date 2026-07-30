@@ -25,6 +25,8 @@ screen_test.py
 screen_vision_test.py
 vision_test.py
 internet_test.py
+voice_test.py
+voice_notes/*.wav
 
 # Photos
 photo_*.jpg
