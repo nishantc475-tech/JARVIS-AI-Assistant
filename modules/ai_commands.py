@@ -21,6 +21,7 @@ from file_search import find_file
 import os
 from internet_speed import check_speed
 from voice_notes import record_voice, play_voice
+from automation import run_automation
 
 def handle_ai(command):
 
@@ -470,6 +471,14 @@ def handle_ai(command):
 
         if not play_voice():
             speak("No voice note found.")
+
+        return True
+
+    # ---------------- AUTOMATION ----------------
+
+    elif run_automation(command):
+
+        speak("Done.")
 
         return True
     

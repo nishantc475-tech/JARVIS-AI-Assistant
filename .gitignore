@@ -27,6 +27,7 @@ vision_test.py
 internet_test.py
 voice_test.py
 voice_notes/*.wav
+automation_test.py
 
 # Photos
 photo_*.jpg
