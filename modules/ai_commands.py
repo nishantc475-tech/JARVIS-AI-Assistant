@@ -17,6 +17,8 @@ from camera import open_camera
 from camera import take_photo
 from pdf_reader import choose_pdf, summarize_pdf
 from ocr import read_image_text
+from file_search import find_file
+import os
 
 def handle_ai(command):
 
@@ -392,6 +394,32 @@ def handle_ai(command):
         print(text)
 
         speak(text[:400])
+
+        return True
+
+    # ---------------- FILE SEARCH ----------------
+
+    elif command.startswith("find "):
+
+        filename = command.replace("find", "").strip()
+
+        speak(f"Searching for {filename}")
+
+        results = find_file(filename, r"D:\JARVIS-AI-ASSISTANT")
+
+        if len(results) == 0:
+            speak("No matching file found.")
+            return True
+
+        print("\nFound Files:\n")
+
+        for file in results:
+            print(file)
+
+        speak(f"I found {len(results)} matching file.")
+        speak("Opening the first result.")
+
+        os.startfile(results[0])
 
         return True
     
