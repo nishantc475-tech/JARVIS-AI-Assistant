@@ -46,7 +46,7 @@ async def _tts(text):
 
 
 def speak(text):
-
-    print("Jarvis:", text)
-
-    asyncio.run(_tts(text))
+    try:
+        asyncio.run(_tts(text))
+    except Exception:
+        print(f"Jarvis: {text}")

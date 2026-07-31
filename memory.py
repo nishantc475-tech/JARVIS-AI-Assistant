@@ -21,3 +21,19 @@ def remember(key, value):
 def recall(key):
     data = load_memory()
     return data.get(key, None)
+
+def clear_memory():
+    save_memory({})
+
+def recall_all():
+    return load_memory()    
+
+def forget(key):
+    data = load_memory()
+
+    if key in data:
+        del data[key]
+        save_memory(data)
+        return True
+
+    return False
