@@ -50,7 +50,7 @@ def take_photo():
     camera = cv2.VideoCapture(0)
 
     if not camera.isOpened():
-        return "Unable to open camera."
+        return None 
 
     print("Capturing photo in 3 seconds...")
 
@@ -61,7 +61,7 @@ def take_photo():
     if not ret:
         camera.release()
         cv2.destroyAllWindows()
-        return "Failed to capture photo."
+        return None
 
     filename = datetime.now().strftime(
         "photo_%Y%m%d_%H%M%S.jpg"
@@ -72,4 +72,4 @@ def take_photo():
     camera.release()
     cv2.destroyAllWindows()
 
-    return f"Photo saved as {filename}"
+    return filename

@@ -10,21 +10,20 @@ def get_news():
     )
 
     try:
-        response = requests.get(url)
-        data = response.json()
 
-        print(data)   # Debug
+        response = requests.get(url, timeout=10)
+        data = response.json()
+        
 
         if "articles" not in data:
-            return []
+            return "Unable to fetch news."
 
         headlines = []
 
-        for article in data["articles"]:
-            headlines.append(article["title"])
+        for i, article in enumerate(data["articles"], start=1):
+            headlines.append(f"{i}. {article['title']}")
 
-        return headlines
+        return "\n\n".join(headlines)
 
-    except Exception as e:
-        print(e)
-        return []
+    except Exception:
+        return "Unable to connect to News service."

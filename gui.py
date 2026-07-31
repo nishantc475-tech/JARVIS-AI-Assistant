@@ -6,6 +6,10 @@ from speak import speak
 from listen import listen
 from image_picker import choose_image
 from vision import describe_image
+from camera import take_photo
+from pdf_reader import choose_pdf, summarize_pdf
+from weather import get_weather
+from news import get_news
 
 # -----------------------------
 # Theme
@@ -142,26 +146,125 @@ def image_mode():
 
 def camera_mode():
 
-    chat_box.insert("end", "\n📷 Camera feature coming soon...\n")
+    set_status("📷 Opening Camera...")
+
+    image_path = take_photo()
+
+    if not image_path:
+        set_status("🟢 Status : Online")
+        return
+
+    chat_box.insert("end", "\n📷 Photo captured.\n")
+    chat_box.insert("end", "🤖 Analyzing image...\n")
     chat_box.see("end")
+
+    set_status("🟣 Vision AI...")
+
+    def run_ai():
+
+        answer = describe_image(image_path)
+
+        speak(answer)
+
+        app.after(
+            0,
+            lambda: (
+                chat_box.insert("end", f"\nJarvis: {answer}\n"),
+                chat_box.see("end"),
+                set_status("🟢 Status : Online")
+            )
+        )
+
+    threading.Thread(target=run_ai, daemon=True).start()
 
 
 def pdf_mode():
 
-    chat_box.insert("end", "\n📄 PDF Reader feature coming soon...\n")
+    pdf_path = choose_pdf()
+
+    if not pdf_path:
+        return
+
+    chat_box.insert("end", "\n📄 PDF selected.\n")
+    chat_box.insert("end", "🤖 Reading PDF...\n")
     chat_box.see("end")
+
+    set_status("📄 Reading PDF...")
+
+    def run_ai():
+
+        answer = summarize_pdf(pdf_path)
+
+        speak(answer)
+
+        app.after(
+            0,
+            lambda: (
+                chat_box.insert("end", f"\nJarvis: {answer}\n"),
+                chat_box.see("end")
+            )
+        )
+
+        set_status("🟢 Status : Online")
+
+    threading.Thread(target=run_ai, daemon=True).start()
 
 
 def weather_mode():
 
-    chat_box.insert("end", "\n🌦 Weather feature coming soon...\n")
+    city = entry.get().strip()
+
+    if city == "":
+        city = "Dehradun"
+
+    chat_box.insert("end", f"\n🌦 Checking weather for {city}...\n")
     chat_box.see("end")
+
+    set_status("🌦 Fetching Weather...")
+
+    def run_ai():
+
+        answer = get_weather(city)
+
+        speak(answer)
+
+        app.after(
+            0,
+            lambda: (
+                chat_box.insert("end", f"\nJarvis: {answer}\n"),
+                chat_box.see("end")
+            )
+        )
+
+        set_status("🟢 Status : Online")
+
+    threading.Thread(target=run_ai, daemon=True).start()
 
 
 def news_mode():
 
-    chat_box.insert("end", "\n📰 News feature coming soon...\n")
+    chat_box.insert("end", "\n📰 Fetching latest news...\n")
     chat_box.see("end")
+
+    set_status("📰 Fetching News...")
+
+    def run_ai():
+
+        answer = get_news()
+
+        speak(answer)
+
+        app.after(
+            0,
+            lambda: (
+                chat_box.insert("end", f"\nJarvis:\n{answer}\n"),
+                chat_box.see("end")
+            )
+        )
+
+        set_status("🟢 Status : Online")
+
+    threading.Thread(target=run_ai, daemon=True).start()
 
 
 def settings_mode():
