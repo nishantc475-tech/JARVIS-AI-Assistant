@@ -87,19 +87,39 @@ JARVIS-AI-ASSISTANT/
 
 # 📸 Screenshots
 
-Add your screenshots inside the **assets** folder.
+## 🏠 Home Screen
 
-Example:
-
-```
-assets/home.png
-assets/camera.png
-assets/weather.png
-assets/memory.png
-assets/screen.png
-```
+![Home](assets/home.png)
 
 ---
+
+## 🎤 Voice Assistant
+
+![Voice](assets/voice.png)
+
+---
+
+## 📷 Camera AI
+
+![Camera](assets/camera.png)
+
+---
+
+## 🌦 Weather Information
+
+![Weather](assets/weather.png)
+
+---
+
+## 🧠 Memory System
+
+![Memory](assets/memory.png)
+
+---
+
+## 🖥 Screen Analysis
+
+![Screen AI](assets/screen.png)
 
 # ⚙ Installation
 
