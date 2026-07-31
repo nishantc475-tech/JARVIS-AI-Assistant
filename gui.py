@@ -14,6 +14,7 @@ from history import save_chat, clear_history, load_history
 from web_search import search_web
 from memory import remember, recall, clear_memory
 from memory import remember, recall, recall_all, forget
+from system_control import open_app, open_website
 
 
 # -----------------------------
@@ -54,6 +55,35 @@ def send_message():
     question = entry.get().strip()
 
     question_lower = question.lower()
+
+
+# Open Applications
+
+    if question_lower.startswith("open "):
+
+        app_name = question[5:].strip()
+
+        answer = open_app(app_name)
+
+        chat_box.insert("end", f"\nJarvis: {answer}\n")
+        chat_box.see("end")
+
+        speak(answer)
+
+        return
+
+    if question_lower.startswith("website "):
+
+        site = question[8:].strip()
+
+        answer = open_website(site)
+
+        chat_box.insert("end", f"\nJarvis: {answer}\n")
+        chat_box.see("end")
+
+        speak(answer)
+
+        return
 
     # Show everything Jarvis remembers
     if (
