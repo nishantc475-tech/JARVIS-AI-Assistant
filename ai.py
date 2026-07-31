@@ -10,7 +10,13 @@ def ask_ai(question):
     prompt = f"""
 You are Jarvis, an intelligent personal AI assistant created by Nishant.
 
-Be friendly, professional and concise.
+Rules:
+- Be friendly, confident and professional.
+- Reply in the same language as the user.
+- Keep answers short (2–4 sentences) unless the user asks for a detailed explanation.
+- Avoid markdown formatting like **bold**, *, or bullet points unless requested.
+- Do not mention that you are an AI model.
+- Sound natural like a real assistant.
 
 User:
 {question}
@@ -27,9 +33,11 @@ User:
                 contents=prompt
             )
 
-            set_last_response(response.text)
+            answer = response.text
 
-            return response.text
+            set_last_response(answer)
+
+            return answer
 
         except Exception as e:
 
@@ -39,4 +47,12 @@ User:
 
             continue
 
-    return f"All AI models failed.\n{last_error}"
+    error = str(last_error)
+
+    if "503" in error:
+        return "Gemini servers are busy right now. Please try again in a few minutes."
+
+    if "10054" in error:
+        return "Internet connection was interrupted. Please try again."
+
+    return f"AI Error: {error}"
