@@ -1,86 +1,116 @@
-<div align="center">
+<p align="center">
+  <img src="assets/banner.png" alt="JARVIS AI Assistant Banner" width="100%">
+</p>
 
-# 🤖 JARVIS AI Assistant
+<h1 align="center">🤖 JARVIS AI Assistant</h1>
 
-### An Advanced AI Desktop Assistant built with Python & Gemini AI
+<p align="center">
+An AI-powered Desktop Assistant built with Python, Gemini AI, Voice Recognition, Computer Vision, and Automation.
+</p>
+
+<p align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
 ![Gemini](https://img.shields.io/badge/Gemini-AI-orange?style=for-the-badge)
-![CustomTkinter](https://img.shields.io/badge/CustomTkinter-GUI-green?style=for-the-badge)
-![OpenCV](https://img.shields.io/badge/OpenCV-Vision-red?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=for-the-badge)
+![CustomTkinter](https://img.shields.io/badge/CustomTkinter-GUI-blueviolet?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
 
-An intelligent AI desktop assistant inspired by **Iron Man's JARVIS**, capable of AI conversations, voice interaction, computer vision, PDF summarization, weather updates, desktop automation, and much more.
-
-</div>
+</p>
 
 ---
 
 # ✨ Features
 
-## 🤖 AI Features
-
-- 💬 Gemini AI Chat
+- 💬 AI Chat using Google Gemini
 - 🎤 Voice Assistant
-- 🧠 Memory System (Remember & Recall)
-- 💾 Chat History
-- 📄 PDF Summarizer
-- 🖼 Image Analysis
+- 🔊 Text-to-Speech
 - 📷 Camera AI
+- 🖼 Image Analysis
 - 🖥 Screen Analysis
-
-## 🌍 Smart Services
-
-- 🌦 Live Weather
+- 📄 PDF Reader & Summarizer
+- 🌦 Weather Information
 - 📰 Latest News
-
-## 💻 Desktop Control
-
-- 📂 Open Desktop Applications
-- 🌐 Open Websites
-- ⚙ Modern CustomTkinter GUI
+- 🧠 Memory System
+- 💾 Chat History
+- ⚡ Fast Modern GUI
+- 🌙 Dark Mode Interface
 
 ---
 
-# 🛠 Technologies Used
+# 🛠 Tech Stack
 
-- Python 3
-- Gemini API
+- Python 3.13
+- Google Gemini AI
 - CustomTkinter
 - OpenCV
-- Pillow
-- Edge-TTS
-- SpeechRecognition
-- PyPDF
-- Requests
 - PyAutoGUI
+- PyMuPDF
+- SpeechRecognition
+- Edge-TTS
 - Pygame
+- Requests
 
 ---
 
 # 📂 Project Structure
 
 ```text
-JARVIS-AI-ASSISTANT/
+JARVIS-AI-Assistant/
 │
-├── gui.py
+├── assets/
+│   ├── banner.png
+│   ├── home.png
+│   ├── voice.png
+│   ├── camera.png
+│   ├── image.png
+│   ├── screen.png
+│   └── weather.png
+│
 ├── ai.py
-├── speak.py
+├── gui.py
 ├── listen.py
+├── speak.py
 ├── camera.py
 ├── vision.py
 ├── screen.py
-├── screen_ai.py
+├── memory.py
+├── history.py
 ├── pdf_reader.py
 ├── weather.py
 ├── news.py
-├── memory.py
-├── history.py
-├── system_control.py
-├── config.py
 ├── requirements.txt
-├── README.md
-└── assets/
+└── README.md
+```
+
+---
+
+# 🚀 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/nishantc475-tech/JARVIS-AI-Assistant.git
+```
+
+```bash
+cd JARVIS-AI-Assistant
+```
+
+---
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Run Project
+
+```bash
+python gui.py
 ```
 
 ---
@@ -105,107 +135,68 @@ JARVIS-AI-ASSISTANT/
 
 ---
 
-## 🌦 Weather Information
+## 🖼 Image Analysis
 
-![Weather](assets/weather.png)
-
----
-
-## 🧠 Memory System
-
-![Memory](assets/memory.png)
+![Image](assets/image.png)
 
 ---
 
 ## 🖥 Screen Analysis
 
-![Screen AI](assets/screen.png)
-
-# ⚙ Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/nishantc475-tech/JARVIS-AI-ASSISTANT.git
-```
-
-## Go to Project Folder
-
-```bash
-cd JARVIS-AI-ASSISTANT
-```
-
-## Create Virtual Environment
-
-```bash
-python -m venv venv
-```
-
-## Activate Virtual Environment
-
-Windows
-
-```bash
-venv\Scripts\activate
-```
-
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-## Run Project
-
-```bash
-python gui.py
-```
+![Screen](assets/screen.png)
 
 ---
 
-# 🚀 Future Improvements
+## 🌦 Weather Module
 
-- Wake Word Detection
-- Offline AI Model
-- WhatsApp Automation
-- Email Automation
-- Calendar Assistant
-- Music Controller
-- Face Recognition
-- AI Task Scheduler
+![Weather](assets/weather.png)
 
 ---
 
-# 👨‍💻 Developer
+# 💡 Future Improvements
 
-## Nishant Chauhan
+- 🤖 AI Automation
+- 📅 Calendar Integration
+- 📧 Email Assistant
+- 🌐 Browser Automation
+- 🎵 Music Control
+- 📝 Notes Manager
+- 💻 System Monitoring
+- 🔥 Wake Word Detection ("Hey Jarvis")
+
+---
+
+# 👨‍💻 Author
+
+**Nishant Chauhan**
 
 🎓 B.Tech CSE (AI & ML)
 
-💻 Python Developer | AI Enthusiast
+Dev Bhoomi Uttarakhand University
 
-### GitHub
-
+GitHub:
 https://github.com/nishantc475-tech
 
 ---
 
 # ⭐ Support
 
-If you found this project useful:
+If you like this project,
 
 ⭐ Star this repository
 
-🍴 Fork this repository
+🍴 Fork it
 
-💙 Share it with others
+🛠 Contribute to improve it
 
 ---
 
-<div align="center">
+# 📜 License
 
-## ❤️ Thank You
+This project is licensed under the MIT License.
 
-**Made with Python, AI & Passion**
+---
 
-</div>
+<p align="center">
+Made with ❤️ by Nishant Chauhan
+</p>
