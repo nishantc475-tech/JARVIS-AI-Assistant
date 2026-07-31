@@ -10,6 +10,7 @@ from camera import take_photo
 from pdf_reader import choose_pdf, summarize_pdf
 from weather import get_weather
 from news import get_news
+from history import save_chat, clear_history, load_history
 
 # -----------------------------
 # Theme
@@ -61,6 +62,7 @@ def send_message():
     def run_ai():
 
         answer = ask_ai(question)
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -92,11 +94,13 @@ def voice_chat():
         return
 
     chat_box.insert("end", f"\nYou: {question}\n")
+    save_chat("You", question)
     chat_box.see("end")
 
     def run_ai():
 
         answer = ask_ai(question)
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -129,6 +133,7 @@ def image_mode():
     def run_ai():
 
         answer = describe_image(image_path)
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -163,6 +168,7 @@ def camera_mode():
     def run_ai():
 
         answer = describe_image(image_path)
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -194,6 +200,7 @@ def pdf_mode():
     def run_ai():
 
         answer = summarize_pdf(pdf_path)
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -225,6 +232,7 @@ def weather_mode():
     def run_ai():
 
         answer = get_weather(city)
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -251,6 +259,7 @@ def news_mode():
     def run_ai():
 
         answer = get_news()
+        save_chat("Jarvis", answer)
 
         speak(answer)
 
@@ -266,11 +275,51 @@ def news_mode():
 
     threading.Thread(target=run_ai, daemon=True).start()
 
+def clear_chat():
+
+    chat_box.delete("1.0", "end")
+
+    chat_box.insert("end", "Jarvis is ready...\n")
+
+    clear_history()
+
+    set_status("🟢 Status : Online")
+
 
 def settings_mode():
 
-    chat_box.insert("end", "\n⚙ Settings feature coming soon...\n")
-    chat_box.see("end")
+    settings = ctk.CTkToplevel(app)
+
+    settings.title("⚙ Settings")
+    settings.geometry("400x350")
+
+    settings.grab_set()
+
+    title = ctk.CTkLabel(
+        settings,
+        text="JARVIS Settings",
+        font=("Arial", 22, "bold")
+    )
+    title.pack(pady=20)
+
+    appearance = ctk.CTkLabel(
+        settings,
+        text="Appearance Mode",
+        font=("Arial", 16)
+    )
+    appearance.pack(pady=10)
+
+    def dark():
+
+        ctk.set_appearance_mode("Dark")
+
+    def light():
+
+        ctk.set_appearance_mode("Light")
+
+    def system():
+
+        ctk.set_appearance_mode("System")
 
 
 buttons = [
@@ -346,7 +395,24 @@ chat_box.pack(
     expand=True
 )
 
+history = load_history()
+
+if history.strip():
+
+    chat_box.insert(
+        "end",
+        "\n========== Previous Chat ==========\n\n"
+    )
+
+    chat_box.insert("end", history)
+
+    chat_box.insert(
+        "end",
+        "\n===================================\n\n"
+    )
+
 chat_box.insert("end", "Jarvis is ready...\n")
+
 chat_box.see("end")
 
 bottom_frame = ctk.CTkFrame(main_frame)
@@ -387,5 +453,42 @@ voice_btn = ctk.CTkButton(
     ).start()
 )
 voice_btn.pack(side="left")
+
+clear_btn = ctk.CTkButton(
+    bottom_frame,
+    text="🗑",
+    width=60,
+    command=clear_chat
+)
+
+clear_btn.pack(side="left", padx=5)
+
+dark_btn = ctk.CTkButton(
+    settings,
+    text="🌙 Dark Mode",
+    command=dark
+)
+dark_btn.pack(pady=8)
+
+light_btn = ctk.CTkButton(
+    settings,
+    text="☀ Light Mode",
+    command=light
+)
+light_btn.pack(pady=8)
+
+system_btn = ctk.CTkButton(
+    settings,
+    text="💻 System Mode",
+    command=system
+)
+system_btn.pack(pady=8)
+
+about = ctk.CTkLabel(
+    settings,
+    text="JARVIS AI Assistant\nVersion 1.0\nMade by Nishant",
+    font=("Arial", 14)
+)
+about.pack(pady=25)
 
 app.mainloop()
