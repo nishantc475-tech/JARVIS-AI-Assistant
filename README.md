@@ -2,23 +2,15 @@
 
 # 🤖 JARVIS AI Assistant
 
-### An Advanced AI Desktop Assistant built using Python & Gemini AI
+### An Advanced AI Desktop Assistant built with Python & Gemini AI
 
-<img src="https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python"/>
-<img src="https://img.shields.io/badge/Gemini-AI-orange?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/CustomTkinter-GUI-green?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/OpenCV-Vision-red?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge"/>
+![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
+![Gemini](https://img.shields.io/badge/Gemini-AI-orange?style=for-the-badge)
+![CustomTkinter](https://img.shields.io/badge/CustomTkinter-GUI-green?style=for-the-badge)
+![OpenCV](https://img.shields.io/badge/OpenCV-Vision-red?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
----
-
-## 🚀 Overview
-
-JARVIS is an intelligent desktop AI assistant inspired by Iron Man's JARVIS.
-
-It combines AI conversation, voice interaction, computer vision, desktop automation, PDF analysis, weather, news, memory, and application control into one modern desktop application.
-
-Built completely using **Python** and **Gemini AI**.
+An intelligent AI desktop assistant inspired by **Iron Man's JARVIS**, capable of AI conversations, voice interaction, computer vision, PDF summarization, weather updates, desktop automation, and much more.
 
 </div>
 
@@ -26,157 +18,110 @@ Built completely using **Python** and **Gemini AI**.
 
 # ✨ Features
 
-### 🤖 AI Features
+## 🤖 AI Features
 
 - 💬 Gemini AI Chat
 - 🎤 Voice Assistant
-- 🧠 Personal Memory
+- 🧠 Memory System (Remember & Recall)
 - 💾 Chat History
 - 📄 PDF Summarizer
-- 🖼 Image Understanding
+- 🖼 Image Analysis
 - 📷 Camera AI
 - 🖥 Screen Analysis
 
----
-
-### 🌍 Internet Features
+## 🌍 Smart Services
 
 - 🌦 Live Weather
 - 📰 Latest News
 
----
-
-### 💻 Desktop Features
+## 💻 Desktop Control
 
 - 📂 Open Desktop Applications
 - 🌐 Open Websites
-- ⚙ Modern GUI
+- ⚙ Modern CustomTkinter GUI
 
 ---
 
-# 🛠 Tech Stack
+# 🛠 Technologies Used
 
-| Technology | Usage |
-|------------|-------|
-| Python | Main Programming Language |
-| Gemini API | AI Chat |
-| CustomTkinter | GUI |
-| OpenCV | Camera |
-| Pillow | Image Processing |
-| SpeechRecognition | Voice Input |
-| Edge-TTS | AI Voice |
-| Requests | APIs |
-| PyPDF | PDF Reader |
-| PyAutoGUI | Screen Capture |
+- Python 3
+- Gemini API
+- CustomTkinter
+- OpenCV
+- Pillow
+- Edge-TTS
+- SpeechRecognition
+- PyPDF
+- Requests
+- PyAutoGUI
+- Pygame
 
 ---
 
 # 📂 Project Structure
 
-```
-JARVIS-AI-ASSISTANT
+```text
+JARVIS-AI-ASSISTANT/
 │
 ├── gui.py
 ├── ai.py
 ├── speak.py
 ├── listen.py
-├── memory.py
-├── history.py
 ├── camera.py
 ├── vision.py
 ├── screen.py
 ├── screen_ai.py
+├── pdf_reader.py
 ├── weather.py
 ├── news.py
-├── pdf_reader.py
+├── memory.py
+├── history.py
 ├── system_control.py
 ├── config.py
 ├── requirements.txt
 ├── README.md
-│
 └── assets/
-    ├── home.png
-    ├── camera.png
-    ├── weather.png
-    ├── memory.png
-    └── screen.png
 ```
 
 ---
 
 # 📸 Screenshots
 
-## 🏠 Home
+Add your screenshots inside the **assets** folder.
 
-> Add screenshot here
+Example:
 
 ```
 assets/home.png
-```
-
----
-
-## 📷 Camera AI
-
-> Add screenshot here
-
-```
 assets/camera.png
-```
-
----
-
-## 🖥 Screen AI
-
-> Add screenshot here
-
-```
-assets/screen.png
-```
-
----
-
-## 🌦 Weather
-
-> Add screenshot here
-
-```
 assets/weather.png
-```
-
----
-
-## 🧠 Memory
-
-> Add screenshot here
-
-```
 assets/memory.png
+assets/screen.png
 ```
 
 ---
 
 # ⚙ Installation
 
-Clone Repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/JARVIS-AI-ASSISTANT.git
+git clone https://github.com/nishantc475-tech/JARVIS-AI-ASSISTANT.git
 ```
 
-Move into folder
+## Go to Project Folder
 
 ```bash
 cd JARVIS-AI-ASSISTANT
 ```
 
-Create Virtual Environment
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate Environment
+## Activate Virtual Environment
 
 Windows
 
@@ -184,13 +129,13 @@ Windows
 venv\Scripts\activate
 ```
 
-Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run Project
+## Run Project
 
 ```bash
 python gui.py
@@ -200,14 +145,14 @@ python gui.py
 
 # 🚀 Future Improvements
 
-- 📧 Email Automation
-- 💬 WhatsApp Automation
-- 🎵 Music Control
-- 🎙 Wake Word Detection
-- 🌍 Translation
-- 📅 Calendar Assistant
-- 🔥 Offline AI Model
-- 🤖 AI Automation
+- Wake Word Detection
+- Offline AI Model
+- WhatsApp Automation
+- Email Automation
+- Calendar Assistant
+- Music Controller
+- Face Recognition
+- AI Task Scheduler
 
 ---
 
@@ -215,32 +160,32 @@ python gui.py
 
 ## Nishant Chauhan
 
-B.Tech CSE (AI & ML)
+🎓 B.Tech CSE (AI & ML)
 
-Python Developer | AI Enthusiast
+💻 Python Developer | AI Enthusiast
 
-GitHub
+### GitHub
 
-https://github.com/YOUR_USERNAME
+https://github.com/nishantc475-tech
 
 ---
 
 # ⭐ Support
 
-If you like this project,
+If you found this project useful:
 
 ⭐ Star this repository
 
-🍴 Fork it
+🍴 Fork this repository
 
-❤️ Share it
+💙 Share it with others
 
 ---
 
 <div align="center">
 
-## Thank You ❤️
+## ❤️ Thank You
 
-Made with Python & AI
+**Made with Python, AI & Passion**
 
 </div>
