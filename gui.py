@@ -5,12 +5,14 @@ from ai import ask_ai
 from speak import speak
 from listen import listen
 from image_picker import choose_image
-from vision import describe_image
+from vision import describe_image, describe_screen
 from camera import take_photo
 from pdf_reader import choose_pdf, summarize_pdf
 from weather import get_weather
 from news import get_news
 from history import save_chat, clear_history, load_history
+from web_search import search_web
+
 
 # -----------------------------
 # Theme
@@ -149,6 +151,36 @@ def image_mode():
 
     threading.Thread(target=run_ai, daemon=True).start()
 
+def screen_mode():
+
+    chat_box.insert("end", "\n🖥 Capturing screen...\n")
+    chat_box.see("end")
+
+    set_status("🖥 Screen Analysis...")
+
+    def run_ai():
+
+        answer = describe_screen()
+
+        speak(answer)
+
+        save_chat("Jarvis", answer)
+
+        app.after(
+            0,
+            lambda: (
+                chat_box.insert("end", f"\nJarvis: {answer}\n"),
+                chat_box.see("end")
+            )
+        )
+
+        set_status("🟢 Status : Online")
+
+    threading.Thread(
+        target=run_ai,
+        daemon=True
+    ).start() 
+
 def camera_mode():
 
     set_status("📷 Opening Camera...")
@@ -248,6 +280,43 @@ def weather_mode():
 
     threading.Thread(target=run_ai, daemon=True).start()
 
+def search_mode():
+
+    query = entry.get().strip()
+
+    if query == "":
+        return
+
+    chat_box.insert("end", f"\n🔍 Searching: {query}\n")
+    chat_box.see("end")
+
+    entry.delete(0, "end")
+
+    set_status("🌐 Searching Web...")
+
+    def run_search():
+
+        result = search_web(query)
+
+        save_chat("Jarvis", result)
+
+        app.after(
+            0,
+            lambda: (
+                chat_box.insert("end", f"\nJarvis:\n{result}\n"),
+                chat_box.see("end")
+            )
+        )
+
+        speak("Search completed.")
+
+        set_status("🟢 Status : Online")
+
+    threading.Thread(
+        target=run_search,
+        daemon=True
+    ).start()
+
 
 def news_mode():
 
@@ -290,20 +359,20 @@ def settings_mode():
 
     settings = ctk.CTkToplevel(app)
 
-    settings.title("⚙ Settings")
-    settings.geometry("400x350")
+    settings_mode.title("⚙ Settings")
+    settings_mode.geometry("400x350")
 
-    settings.grab_set()
+    settings_mode.grab_set()
 
     title = ctk.CTkLabel(
-        settings,
+        settings_mode,
         text="JARVIS Settings",
         font=("Arial", 22, "bold")
     )
     title.pack(pady=20)
 
     appearance = ctk.CTkLabel(
-        settings,
+        settings_mode,
         text="Appearance Mode",
         font=("Arial", 16)
     )
@@ -321,6 +390,34 @@ def settings_mode():
 
         ctk.set_appearance_mode("System")
 
+    dark_btn = ctk.CTkButton(
+        settings,
+        text="🌙 Dark Mode",
+        command=dark
+    )
+    dark_btn.pack(pady=8)
+
+    light_btn = ctk.CTkButton(
+        settings,
+        text="☀ Light Mode",
+        command=light
+    )
+    light_btn.pack(pady=8)
+
+    system_btn = ctk.CTkButton(
+        settings,
+        text="💻 System Mode",
+        command=system
+    )
+    system_btn.pack(pady=8)
+
+    about = ctk.CTkLabel(
+        settings,
+        text="JARVIS AI Assistant\nVersion 1.0\nMade by Nishant",
+        font=("Arial", 14)
+    )
+    about.pack(pady=25)    
+
 
 buttons = [
     ("🏠 Home", None),
@@ -328,9 +425,11 @@ buttons = [
     ("🎤 Voice", lambda: threading.Thread(target=voice_chat, daemon=True).start()),
     ("📷 Camera", camera_mode),
     ("🖼 Image", image_mode),
+    ("🖥 Screen AI", screen_mode),
     ("📄 PDF", pdf_mode),
     ("🌦 Weather", weather_mode),
     ("📰 News", news_mode),
+    ("🌐 Web Search", search_mode),
     ("⚙ Settings", settings_mode),
 ]
 
@@ -463,32 +562,6 @@ clear_btn = ctk.CTkButton(
 
 clear_btn.pack(side="left", padx=5)
 
-dark_btn = ctk.CTkButton(
-    settings,
-    text="🌙 Dark Mode",
-    command=dark
-)
-dark_btn.pack(pady=8)
 
-light_btn = ctk.CTkButton(
-    settings,
-    text="☀ Light Mode",
-    command=light
-)
-light_btn.pack(pady=8)
-
-system_btn = ctk.CTkButton(
-    settings,
-    text="💻 System Mode",
-    command=system
-)
-system_btn.pack(pady=8)
-
-about = ctk.CTkLabel(
-    settings,
-    text="JARVIS AI Assistant\nVersion 1.0\nMade by Nishant",
-    font=("Arial", 14)
-)
-about.pack(pady=25)
 
 app.mainloop()

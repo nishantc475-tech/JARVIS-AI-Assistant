@@ -30,6 +30,7 @@ voice_notes/*.wav
 automation_test.py
 scheduler_test.py
 schedule.json
+chat_history.txt
 
 # Photos
 photo_*.jpg
